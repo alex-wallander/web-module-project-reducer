@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import reducer, { initialState } from './reducers';
-import { applyNumber, changeOpertaion } from './actions/index';
+import { applyNumber, changeOpertaion, clearDisplay, addMemory, currentMemory, clearMemory } from './actions/index';
 
 import './App.css';
 
@@ -20,6 +20,22 @@ function App() {
     dispatch(changeOpertaion(o));
   }
 
+  const clearCE = () => {
+    dispatch(clearDisplay())
+  }
+
+  const addToMemory = () => {
+    dispatch(addMemory());
+  }
+
+  const displayMemory = () => {
+    dispatch(currentMemory());
+  }
+
+  const removeMemory = () => {
+    dispatch(clearMemory());
+  }
+
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -37,9 +53,9 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"M+"} onClick={addToMemory}/>
+              <CalcButton value={"MR"} onClick={displayMemory}/>
+              <CalcButton value={"MC"} on onClick={removeMemory}/>
             </div>
 
             <div className="row">
@@ -67,7 +83,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={clearCE}/>
             </div>
 
           </form>
